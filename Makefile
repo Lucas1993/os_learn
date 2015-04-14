@@ -1,4 +1,4 @@
-OBJECTS= loader.o kmain.o vga_driver.o string.o io.o terminal.o serial.o
+OBJECTS= loader.o kmain.o vga_driver.o string.o io.o terminal.o serial.o gdt_set.o gdt.o  idt_set.o isr_wrapper.o isr.o int_handlers.o idt.o pic.o timer.o keyboard.o
 CC=i686-elf-gcc
 CFLAGS=-std=gnu99 -I$(INCLUDEDIR) -nostdlib -nostartfiles -ffreestanding -O2 -Wall -Wextra
 LDFLAGS= -T link.ld -melf_i386
@@ -13,6 +13,7 @@ all: kernel.elf
 kernel.elf: $(OBJECTS)
 	i686-elf-ld $(LDFLAGS) $(OBJECTS) -o kernel.elf
 
+#Compilar stage2_eltorito ou baixar de outro lugar.
 os.iso: kernel.elf
 	cp kernel.elf iso/boot/kernel.elf
 			genisoimage -R                              \

@@ -63,6 +63,7 @@ void* memset(void* mem, int value, size_t len) {
 
 	while(i < len) {
 		dst[i] = (uint8_t) value;
+		i++;
 	}
 
 	return mem;
